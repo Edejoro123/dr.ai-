@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dr AI | Pharmacy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root { --green: #00ff99; --text: #000; --muted: rgba(0,0,0,0.7); }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body { font-family: 'Poppins', sans-serif; background: linear-gradient(180deg, rgba(0,255,153,0.08), #fff 28%, #fff 100%); color: var(--text); }
+      .wrap { width: min(1200px, calc(100% - 32px)); margin: 0 auto; padding: 28px 0 60px; }
+      .topbar { display: flex; justify-content: space-between; align-items: center; gap: 18px; padding: 10px 0 26px; }
+      .brand { font-size: 1.5rem; font-weight: 700; }
+      .brand span { color: var(--green); }
+      .nav { display: flex; gap: 18px; }
+      .nav a { position: relative; z-index: 1; font-size: 0.95rem; font-weight: 500; color: var(--text); text-decoration: none; padding: 10px 14px; border-radius: 14px; overflow: hidden; transition: color 0.2s ease, transform 0.2s ease; }
+      .nav a::before { content: ""; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,255,153,0.46), rgba(255,255,255,0.4)); border: 1px solid rgba(0,0,0,0.08); border-radius: 14px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.9), 0 10px 22px rgba(0,0,0,0.06); opacity: 0; transform: scale(0.96); transition: opacity 0.25s ease, transform 0.25s ease; z-index: -1; }
+      .nav a:hover { color: #000; transform: translateY(-1px); }
+      .nav a:hover::before { opacity: 1; transform: scale(1); }
+      .actions { display: flex; gap: 12px; }
+      .liquid-btn, .outline-btn, .action-pill { border: 1px solid rgba(0,0,0,0.08); border-radius: 18px; padding: 12px 18px; font-weight: 600; font-family: 'Poppins', sans-serif; text-decoration: none; color: #000; background: linear-gradient(135deg, rgba(0,255,153,0.42), rgba(255,255,255,0.2)); box-shadow: inset 0 1px 0 rgba(255,255,255,0.75), 0 8px 20px rgba(0,0,0,0.06); }
+      .outline-btn { background: rgba(255,255,255,0.18); }
+      .action-pill { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 8px 12px; cursor: pointer; border: 1px solid rgba(0,0,0,0.08); }
+      .auth-toggle.hidden,
+      .logout-link.hidden { display: none; }
+      .logout-link {
+        display: inline-flex; align-items: center; justify-content: center; border: 1px solid rgba(0,0,0,0.08); border-radius: 18px; padding: 12px 18px; font-weight: 700; font-family: 'Poppins', sans-serif; text-decoration: none; color: #000; background: linear-gradient(135deg, rgba(0,255,153,0.88), rgba(255,255,255,0.35)); box-shadow: inset 0 1px 0 rgba(255,255,255,0.75), 0 8px 20px rgba(0,0,0,0.06); }
+      h1 { font-size: clamp(2.2rem, 4vw, 3.2rem); margin: 10px 0 14px; }
+      .sub { color: var(--muted); margin-bottom: 24px; }
+      .search-wrap { margin: 0 0 22px; }
+      .search-input { width: 100%; padding: 16px 18px; border-radius: 16px; border: 1px solid rgba(0,0,0,0.08); background: rgba(255,255,255,0.8); font-family: 'Poppins', sans-serif; font-size: 1rem; }
+      .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+      .card { background: rgba(255,255,255,0.32); border: 1px solid rgba(0,0,0,0.08); border-radius: 24px; padding: 18px; box-shadow: 0 24px 50px rgba(0,0,0,0.06); }
+      .card-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+      .avatar { width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, rgba(0,255,153,0.55), rgba(255,255,255,0.4)); display: grid; place-items: center; font-size: 2rem; font-weight: 700; }
+      .online-pill { display: inline-flex; align-items: center; gap: 8px; font-size: 0.8rem; font-weight: 600; color: #127a45; background: rgba(0,255,153,0.12); border: 1px solid rgba(0,255,153,0.28); border-radius: 999px; padding: 5px 10px; }
+      .online-dot { width: 8px; height: 8px; border-radius: 50%; background: #1ecf72; box-shadow: 0 0 0 4px rgba(30,207,114,0.14); }
+      .card h3 { font-size: 1.3rem; margin-bottom: 6px; }
+      .meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 12px; }
+      .bio { color: var(--muted); line-height: 1.6; font-size: 0.94rem; margin-bottom: 12px; }
+      .contact { display: grid; gap: 7px; font-size: 0.9rem; }
+      .card-footer { margin-top: 16px; display: flex; justify-content: flex-end; }
+      .empty { padding: 30px; background: rgba(255,255,255,0.3); border: 1px solid rgba(0,0,0,0.06); border-radius: 20px; }
+      .site-footer { margin-top: 32px; padding-top: 22px; border-top: 1px solid rgba(0,0,0,0.08); color: var(--muted); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+      .site-footer a { color: var(--muted); text-decoration: none; }
+      .site-footer a:hover { color: #000; }
+      @media (max-width: 900px) { .nav { display: none; } .grid { grid-template-columns: 1fr; } .site-footer { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="topbar">
+        <a href="home.html" class="brand" aria-label="Go to homepage">Dr<span>AI</span></a>
+        <nav class="nav">
+          <a href="home.html">Home</a>
+          <a href="chat.html">Chat AI</a>
+          <a href="doctor-page.html">Doctors</a>
+          <a href="pharmacy-page.html">Pharmacy</a>
+          <a href="signup.html" class="auth-toggle">Signup</a>
+        </nav>
+        <div class="actions">
+          <a href="login.html" class="outline-btn auth-toggle">Login</a>
+          <a href="signup.html" class="liquid-btn auth-toggle">Join now</a>
+          <a href="home.html" class="logout-link hidden" id="logoutBtn">Logout</a>
+        </div>
+      </header>
+
+      <h1>Pharmacy store list</h1>
+      <p class="sub">Trusted pharmacies and drug stores that have signed up on the platform.</p>
+      <div class="search-wrap"><input id="pharmacySearch" class="search-input" type="search" placeholder="Search by pharmacy username or email" /></div>
+      <div id="pharmacyList" class="grid"></div>
+
+      <footer class="site-footer">
+        <div>
+          <strong>Dr<span style="color: var(--green);">AI</span></strong>
+          <div>Smart care for every patient.</div>
+        </div>
+        <div>
+          <div><a href="home.html">Home</a></div>
+          <div><a href="chat.html">Chat AI</a></div>
+          <div><a href="doctor-page.html">Doctors</a></div>
+        </div>
+        <div>
+          <div>support@dr-ai.com</div>
+          <div>+234 800 000 0000</div>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      const pharmacySearch = document.getElementById('pharmacySearch');
+      const pharmacyList = document.getElementById('pharmacyList');
+      const logoutBtn = document.getElementById('logoutBtn');
+      let pharmacyProfiles = [];
+
+      function applyAuthState() {
+        const loggedInUser = JSON.parse(localStorage.getItem('drAiUser') || 'null');
+        document.querySelectorAll('.auth-toggle').forEach((link) => {
+          link.classList.toggle('hidden', Boolean(loggedInUser));
+        });
+        logoutBtn.classList.toggle('hidden', !loggedInUser);
+      }
+
+      function logoutUser(event) {
+        event.preventDefault();
+        localStorage.removeItem('drAiUser');
+        localStorage.removeItem('drAiSelectedRecipient');
+        localStorage.removeItem('drAiUserSession');
+        applyAuthState();
+        window.location.href = 'home.html';
+      }
+
+      logoutBtn.addEventListener('click', logoutUser);
+      applyAuthState();
+
+      function renderPharmacies(filter = '') {
+        const query = filter.trim().toLowerCase();
+        const filtered = pharmacyProfiles.filter((pharmacy) => {
+          if (!query) return true;
+          const username = (pharmacy.username || '').toLowerCase();
+          const email = (pharmacy.email || '').toLowerCase();
+          return username.includes(query) || email.includes(query);
+        });
+
+        if (!filtered.length) {
+          pharmacyList.innerHTML = '<div class="empty">No pharmacy matches your search yet.</div>';
+          return;
+        }
+
+        pharmacyList.innerHTML = filtered.map((pharmacy) => `
+          <article class="card">
+            <div class="card-head">
+              <div class="avatar">${(pharmacy.username || 'P').charAt(0).toUpperCase()}</div>
+              <span class="online-pill"><span class="online-dot"></span>online</span>
+            </div>
+            <h3>${pharmacy.username}</h3>
+            <div class="meta">${pharmacy.yearsExperience || 1}+ years experience</div>
+            <p class="bio">${pharmacy.biography || 'No biography added yet.'}</p>
+            <div class="contact">
+              <div><strong>Location:</strong> ${pharmacy.location || 'Not listed'}</div>
+              <div><strong>Phone:</strong> ${pharmacy.phone || 'Not listed'}</div>
+              <div><strong>Email:</strong> ${pharmacy.email || 'Not listed'}</div>
+            </div>
+            <div class="card-footer">
+              <button class="action-pill" type="button" data-role="pharmacy" data-name="${pharmacy.username}" data-email="${pharmacy.email || ''}" aria-label="Message ${pharmacy.username}">💬 Message</button>
+            </div>
+          </article>
+        `).join('');
+
+        pharmacyList.querySelectorAll('[data-role="pharmacy"]').forEach((button) => {
+          button.addEventListener('click', () => {
+            const profile = {
+              name: button.dataset.name,
+              email: button.dataset.email,
+              role: 'pharmacy',
+            };
+            const key = `drAiInboxMessages`;
+            const messages = JSON.parse(localStorage.getItem(key) || '{}');
+            const threadKey = `${profile.role}:${profile.email}`;
+            if (!messages[threadKey]) {
+              messages[threadKey] = [{
+                sender: 'Patient',
+                time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                text: `Hello ${profile.name}, I need help with medication availability and product guidance.`,
+              }];
+              localStorage.setItem(key, JSON.stringify(messages));
+            }
+            localStorage.setItem('drAiSelectedRecipient', JSON.stringify(profile));
+            window.location.href = 'professional-dashboard.html';
+          });
+        });
+      }
+
+      async function loadPharmacies() {
+        try {
+          const response = await fetch('/api/profiles/pharmacy');
+          const data = await response.json();
+          pharmacyProfiles = data.profiles || [];
+          renderPharmacies();
+        } catch (error) {
+          pharmacyList.innerHTML = '<div class="empty">Unable to load pharmacy profiles right now.</div>';
+        }
+      }
+
+      pharmacySearch.addEventListener('input', (event) => renderPharmacies(event.target.value));
+      loadPharmacies();
+    </script>
+  </body>
+</html>

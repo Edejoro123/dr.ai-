@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dr. AI - Health News</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0a0a0a;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 40px; position: relative; z-index: 1000;
+    }
+    header h1 { font-size: 1.4rem; font-weight: 700; color: #fff; }
+     nav {
+      display: flex;
+      gap: 25px;
+    }
+
+    nav a {
+      font-size: 1rem;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #00ff99;
+    }
+    
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+
+    /* Hamburger */
+    .hamburger { display: none; flex-direction: column; justify-content: space-between; width: 28px; height: 20px; cursor: pointer; }
+    .hamburger div { height: 3px; background: #fff; border-radius: 3px; transition: all 0.4s ease; }
+    .hamburger.active div:nth-child(1) { transform: rotate(45deg) translateY(8px); }
+    .hamburger.active div:nth-child(2) { opacity: 0; }
+    .hamburger.active div:nth-child(3) { transform: rotate(-45deg) translateY(-8px); }
+
+    /* Mobile Nav Overlay */
+    .mobile-nav {
+      position: fixed; top:0; left:0; width:100%; height:100vh; background:#0a0a0a;
+      display:flex; flex-direction:column; justify-content:center; align-items:center;
+      transform:translateY(-100%); transition:transform 0.6s ease; z-index:999;
+    }
+    .mobile-nav.active { transform:translateY(0); }
+    .mobile-nav a { font-size:1.5rem; margin:20px 0; color:#00ff99; opacity:0; animation:slideIn 0.6s forwards; }
+    @keyframes slideIn { from{opacity:0; transform:translateY(30px);} to{opacity:1; transform:translateY(0);} }
+
+    /* News Section */
+    .news-container { max-width:900px; margin:40px auto; padding:20px; }
+    .news-item { background:#1a1a1a; padding:20px; border-radius:10px; margin-bottom:30px; }
+    .news-item img { width:100%; border-radius:10px; margin-bottom:15px; }
+    .news-item h2 { color:#00ff99; margin-bottom:10px; }
+    .news-item p { color:#ccc; }
+    .news-item a { display:inline-block; margin-top:10px; color:#00ff99; font-weight:600; }
+
+    /* Video block */
+    .video { margin-top:15px; border-radius:10px; overflow:hidden; }
+    .video iframe { width:100%; height:315px; border:0; }
+
+    /* Actions */
+    .actions { margin-top:15px; display:flex; gap:12px; align-items:center; }
+
+    /* Like & Comment buttons unified style */
+.icon-btn {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: 2px solid #00ff99;
+  display: flex; align-items: center; justify-content: center;
+  background: transparent;            /* transparent background */
+  color: transparent;                 /* transparent glyph by default */
+  -webkit-text-stroke: 2px #00ff99;   /* green outline */
+  transition: color 0.2s, -webkit-text-stroke 0.2s;
+  cursor: pointer;
+  font-size: 1.3rem;
+}
+.icon-btn.active {
+  color: #00ff99;                     /* fills green when active */
+  -webkit-text-stroke: 0;
+}
+
+
+    /* Comments box hidden by default */
+    .comments { margin-top:15px; display:none; }
+    .comments textarea { width:100%; padding:10px; border-radius:5px; border:none; margin-bottom:10px; }
+    .comments button { background:#555; color:#fff; border:none; padding:8px 15px; border-radius:5px; cursor:pointer; }
+
+    @media(max-width:900px){ nav{display:none;} .hamburger{display:flex;} }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Dr. AI</h1>
+    <nav>
+      <a href="home.html">Home</a>
+      <a href="chat.html">Chat AI</a>
+      <a href="doctor-page.html">Doctors</a>
+      <a href="pharmacy-page.html">Pharmacy</a>
+      <a href="signup.html">Sign up</a>
+    </nav>
+    <div class="hamburger" id="hamburger"><div></div><div></div><div></div></div>
+  </header>
+
+  <div class="mobile-nav" id="mobileNav">
+      <a href="home.html">Home</a>
+      <a href="chat.html">Chat AI</a>
+      <a href="doctor-page.html">Doctors</a>
+      <a href="pharmacy-page.html">Pharmacy</a>
+      <a href="signup.html">Sign up</a>
+  </div>
+
+  <section class="news-container" id="news">
+    <h1>Trending Health News</h1>
+
+    <!-- WHO Prematurity -->
+    <div class="news-item">
+      <img src="3.jpg" alt="Prematurity Care">
+      <h2>WHO highlights lifesaving care for preterm babies</h2>
+      <p>On World Prematurity Day 2025, WHO released new guidelines to improve survival rates for small and preterm babies.</p>
+      <a href="https://www.who.int/news-room" target="_blank">Read full article</a>
+      <div class="video"><iframe src="https://www.youtube.com/embed/MeJQ9d2eYWA?si=BhbZTWwT-gZKAKBV" title="WHO Prematurity Video" allowfullscreen></iframe></div>
+      <div class="actions">
+  <!-- Like -->
+  <button class="icon-btn" onclick="toggleIcon(this)">❤</button>
+  <!-- Comment -->
+  <button class="icon-btn" onclick="toggleComments(this)">💬</button>
+</div>
+
+      <div class="comments"><textarea placeholder="Write a comment..."></textarea><button onclick="postComment(this)">Comment</button><div class="comment-list"></div></div>
+    </div>
+
+    <!-- Diabetes in Pregnancy -->
+    <div class="news-item">
+      <img src="4.jpg" alt="Diabetes Pregnancy">
+      <h2>WHO launches global guidelines on diabetes during pregnancy</h2>
+      <p>New recommendations aim to reduce risks for mothers and infants worldwide.</p>
+      <a href="https://www.who.int/news-room" target="_blank">Read full article</a>
+      <div class="actions">
+  <!-- Like -->
+  <button class="icon-btn" onclick="toggleIcon(this)">❤</button>
+  <!-- Comment -->
+  <button class="icon-btn" onclick="toggleComments(this)">💬</button>
+</div>
+
+      <div class="comments"><textarea placeholder="Write a comment..."></textarea><button onclick="postComment(this)">Comment</button><div class="comment-list"></div></div>
+    </div>
+
+    <!-- Pain Research -->
+    <div class="news-item">
+      <img src="6.jpg" alt="Pain Research">
+      <h2>Safer pain relief: enzyme discovery</h2>
+      <p>Scientists identified VLK enzyme that activates pain signals without disrupting movement, paving way for safer painkillers.</p>
+      <a href="https://www.sciencedaily.com/news/health_medicine/" target="_blank">Read full article</a>
+      <div class="actions">
+  <!-- Like -->
+  <button class="icon-btn" onclick="toggleIcon(this)">❤</button>
+  <!-- Comment -->
+  <button class="icon-btn" onclick="toggleComments(this)">💬</button>
+</div>
+
+      <div class="comments"><textarea placeholder="Write a comment..."></textarea><button onclick="postComment(this)">Comment</button><div class="comment-list"></div></div>
+    </div>
+
+    <!-- Nigeria Lassa Fever -->
+    <div class="news-item">
+      <img src="5.png" alt="Lassa Fever">
+      <h2>Nigeria reports 976 Lassa Fever cases</h2>
+      <p>As of November 2025, Nigeria recorded 976 cases and 178 deaths from Lassa Fever.</p>
+      <a href="https://guardian.ng/news" target="_blank">Read full article</a>
+            <div class="actions">
+  <!-- Like -->
+  <button class="icon-btn" onclick="toggleIcon(this)">❤</button>
+  <!-- Comment -->
+  <button class="icon-btn" onclick="toggleComments(this)">💬</button>
+</div>
+
+      <div class="comments">
+        <textarea placeholder="Write a comment..."></textarea>
+        <button onclick="postComment(this)">Comment</button>
+        <div class="comment-list"></div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Navbar mobile toggle
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      mobileNav.classList.toggle('active');
+    });
+
+    // Toggle like icon
+    function toggleIcon(btn) {
+      btn.classList.toggle('active');
+    }
+
+    // Toggle comments visibility
+    function toggleComments(btn) {
+      const commentsBox = btn.closest('.news-item').querySelector('.comments');
+      const isOpen = commentsBox.style.display === 'block';
+      commentsBox.style.display = isOpen ? 'none' : 'block';
+
+      if (!isOpen) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    }
+
+    // Post a comment
+    function postComment(btn) {
+      const textarea = btn.previousElementSibling;
+      const commentText = textarea.value.trim();
+      if (commentText) {
+        const commentList = btn.nextElementSibling;
+        const newComment = document.createElement('p');
+        newComment.textContent = commentText;
+        commentList.appendChild(newComment);
+        textarea.value = '';
+      }
+    }
+  </script>
+</body>
+</html>

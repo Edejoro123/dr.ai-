@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dr AI | Professional Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --green: #00ff99;
+        --bg: #f3fff9;
+        --panel: rgba(255,255,255,0.86);
+        --text: #08130f;
+        --muted: rgba(8,19,15,0.7);
+        --line: rgba(8,19,15,0.1);
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(180deg, rgba(0,255,153,0.12), #f7fffb 28%, #f7fffb 100%);
+        color: var(--text);
+      }
+      .container { width: min(1180px, calc(100% - 32px)); margin: 0 auto; padding: 28px 0 48px; }
+      .topbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 24px; }
+      .brand { font-size: 1.6rem; font-weight: 700; }
+      .brand span { color: var(--green); }
+      .nav { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+      .nav a {
+        position: relative; z-index: 1; padding: 10px 14px; border-radius: 12px; text-decoration: none; color: var(--text); font-weight: 500; overflow: hidden; transition: color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+      }
+      .nav a::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(0,255,153,0.46), rgba(255,255,255,0.4));
+        border: 1px solid rgba(0,0,0,0.08);
+        border-radius: 12px;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.9), 0 10px 22px rgba(0,0,0,0.06);
+        opacity: 0;
+        transform: scale(0.96);
+        transition: opacity 0.25s ease, transform 0.25s ease;
+        z-index: -1;
+      }
+      .nav a:hover {
+        color: #000;
+        transform: translateY(-1px);
+      }
+      .nav a:hover::before {
+        opacity: 1;
+        transform: scale(1);
+      }
+      .nav a.active {
+        background: rgba(0,255,153,0.16); border: 1px solid rgba(0,0,0,0.08);
+      }
+      .status { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.72); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; }
+      .status-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 6px rgba(0,255,153,0.18); }
+      .shell { display: grid; grid-template-columns: 320px 1fr; gap: 24px; }
+      .sidebar, .main-panel { background: var(--panel); border: 1px solid var(--line); border-radius: 24px; box-shadow: 0 24px 60px rgba(0,0,0,0.06); }
+      .sidebar { padding: 24px; }
+      .avatar { width: 86px; height: 86px; border-radius: 50%; background: linear-gradient(135deg, rgba(0,255,153,0.65), rgba(255,255,255,0.32)); display: grid; place-items: center; font-size: 2rem; font-weight: 700; margin-bottom: 16px; }
+      .profile-meta h2 { font-size: 1.4rem; margin-bottom: 4px; }
+      .role-tag { display: inline-block; margin-top: 10px; background: rgba(0,255,153,0.14); border: 1px solid rgba(0,255,153,0.3); padding: 7px 12px; border-radius: 999px; font-size: 0.78rem; font-weight: 600; }
+      .info-list { margin-top: 22px; display: grid; gap: 10px; }
+      .info-item { display: flex; justify-content: space-between; gap: 16px; padding: 10px 12px; background: rgba(0,0,0,0.02); border-radius: 12px; }
+      .info-item span { color: var(--muted); }
+      .main-panel { padding: 24px; }
+      .panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+      .panel-header h3 { font-size: 1.6rem; }
+      .cta { background: linear-gradient(135deg, rgba(0,255,153,0.8), rgba(0,255,153,0.46)); border: none; border-radius: 14px; padding: 10px 16px; font-weight: 600; font-family: 'Poppins', sans-serif; }
+      .messages { display: grid; gap: 14px; }
+      .message-card { border: 1px solid var(--line); background: rgba(255,255,255,0.7); border-radius: 18px; padding: 16px; }
+      .message-head { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
+      .patient-name { font-weight: 700; }
+      .time { color: var(--muted); font-size: 0.8rem; }
+      .preview { color: var(--muted); line-height: 1.6; }
+      .composer { margin-top: 22px; display: grid; gap: 10px; }
+      textarea {
+        width: 100%; min-height: 120px; resize: vertical; border-radius: 16px; border: 1px solid var(--line); background: rgba(255,255,255,0.82); padding: 14px 16px; font-family: 'Poppins', sans-serif; font-size: 0.96rem;
+      }
+      .composer-row { display: flex; justify-content: flex-end; }
+      .send-btn { border: none; border-radius: 14px; padding: 12px 18px; background: linear-gradient(135deg, rgba(0,255,153,0.82), rgba(255,255,255,0.5)); font-weight: 700; font-family: 'Poppins', sans-serif; }
+      @media (max-width: 860px) { .shell { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header class="topbar">
+        <a href="home.html" class="brand" aria-label="Go to homepage">Dr<span>AI</span></a>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="professional-dashboard.html" class="active">Dashboard</a>
+          <a href="chat.html">Chat AI</a>
+          <a href="doctor-page.html">Doctors</a>
+          <a href="pharmacy-page.html">Pharmacy</a>
+        </nav>
+        <div class="status"><span class="status-dot"></span><span>Professional inbox live</span></div>
+      </header>
+
+      <div class="shell">
+        <aside class="sidebar">
+          <div class="avatar" id="profileAvatar">D</div>
+          <div class="profile-meta">
+            <h2 id="recipientName">Doctor profile</h2>
+            <div id="recipientRole" class="role-tag">Doctor</div>
+          </div>
+
+          <div class="info-list">
+            <div class="info-item"><span>Email</span><strong id="recipientEmail">-</strong></div>
+            <div class="info-item"><span>Availability</span><strong>Open</strong></div>
+            <div class="info-item"><span>Queue</span><strong>10 active</strong></div>
+          </div>
+        </aside>
+
+        <main class="main-panel">
+          <div class="panel-header">
+            <h3 id="messageTitle">Patient messages</h3>
+            <button class="cta" type="button">New consultation</button>
+          </div>
+
+          <div id="messages" class="messages"></div>
+
+          <div class="composer">
+            <label for="messageDraft" style="font-weight:600;">Compose a response</label>
+            <textarea id="messageDraft" placeholder="Write a clear medical response here..."></textarea>
+            <div class="composer-row">
+              <button id="sendMessageBtn" class="send-btn" type="button">Send message</button>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script>
+      const recipient = JSON.parse(localStorage.getItem('drAiSelectedRecipient') || 'null');
+      const profileAvatar = document.getElementById('profileAvatar');
+      const recipientName = document.getElementById('recipientName');
+      const recipientRole = document.getElementById('recipientRole');
+      const recipientEmail = document.getElementById('recipientEmail');
+      const messagesBox = document.getElementById('messages');
+      const messageTitle = document.getElementById('messageTitle');
+      const sendMessageBtn = document.getElementById('sendMessageBtn');
+      const messageDraft = document.getElementById('messageDraft');
+
+      const defaultRole = recipient?.role || 'doctor';
+      const roleLabel = defaultRole.charAt(0).toUpperCase() + defaultRole.slice(1);
+
+      if (recipient) {
+        profileAvatar.textContent = (recipient.name || 'D').charAt(0).toUpperCase();
+        recipientName.textContent = recipient.name || 'Doctor profile';
+        recipientRole.textContent = roleLabel;
+        recipientEmail.textContent = recipient.email || 'No email available';
+        messageTitle.textContent = `${roleLabel} messages`;
+      }
+
+      function getConversationKey() {
+        const targetRole = defaultRole || 'doctor';
+        const targetEmail = (recipient && recipient.email) ? recipient.email : 'support@dr-ai.com';
+        return `${targetRole}:${targetEmail}`;
+      }
+
+      function loadConversationMessages() {
+        const key = getConversationKey();
+        const saved = JSON.parse(localStorage.getItem('drAiInboxMessages') || '{}');
+        return saved[key] || [
+          {
+            sender: 'Patient',
+            time: '08:40 AM',
+            text: `Hello ${roleLabel}, I would like to ask about my symptoms and treatment options.`,
+          },
+          {
+            sender: 'Patient',
+            time: '09:15 AM',
+            text: 'I need help with medication guidance and follow-up instructions.',
+          }
+        ];
+      }
+
+      function renderMessages() {
+        const messages = loadConversationMessages();
+
+        messagesBox.innerHTML = messages.map((item) => `
+          <article class="message-card">
+            <div class="message-head">
+              <div class="patient-name">${item.sender}</div>
+              <div class="time">${item.time}</div>
+            </div>
+            <div class="preview">${item.text}</div>
+          </article>
+        `).join('');
+      }
+
+      sendMessageBtn.addEventListener('click', () => {
+        const text = messageDraft.value.trim();
+        if (!text) return;
+
+        const key = getConversationKey();
+        const saved = JSON.parse(localStorage.getItem('drAiInboxMessages') || '{}');
+        const current = saved[key] || [];
+
+        current.push({
+          sender: 'You',
+          time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+          text,
+        });
+
+        saved[key] = current;
+        localStorage.setItem('drAiInboxMessages', JSON.stringify(saved));
+        messageDraft.value = '';
+        renderMessages();
+      });
+
+      renderMessages();
+    </script>
+  </body>
+</html>

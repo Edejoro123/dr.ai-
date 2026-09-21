@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dr AI | Sign Up</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --glass: rgba(255, 255, 255, 0.2);
+        --glass-strong: rgba(255, 255, 255, 0.32);
+        --green: #00ff99;
+        --green-strong: #fff;
+        --text: #000;
+        --muted: rgba(0, 0, 0, 0.72);
+        --surface: rgba(255, 255, 255, 0.66);
+        --border: rgba(255, 255, 255, 0.45);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: 'Poppins', sans-serif;
+        background: #ffffff;
+        color: var(--text);
+      }
+
+      .page-shell {
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 32px 18px;
+        background: linear-gradient(135deg, rgba(0,255,153,0.09), rgba(255,255,255,0.9));
+      }
+
+      .auth-panel {
+        width: min(1120px, 100%);
+        background: rgba(255, 255, 255, 0.18);
+        border: 1px solid rgba(0,0,0,0.08);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        border-radius: 30px;
+        box-shadow: 0 30px 65px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+      }
+
+      .brand-side {
+        position: relative;
+        padding: 54px 48px;
+        background: linear-gradient(145deg, rgba(0,255,153,0.15), rgba(255,255,255,0.6));
+      }
+
+      .brand-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: rgba(255,255,255,0.45);
+        border: 1px solid rgba(0,0,0,0.06);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
+        border-radius: 999px;
+        padding: 10px 18px;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        font-size: 12px;
+        color: #000;
+        text-decoration: none;
+      }
+
+      .brand-badge span {
+        color: var(--green);
+      }
+
+      .brand-side h1 {
+        margin-top: 32px;
+        font-size: clamp(2.5rem, 4vw, 4.2rem);
+        line-height: 1.05;
+        font-weight: 700;
+        max-width: 500px;
+      }
+
+      .brand-side h1 span {
+        color: var(--green);
+      }
+
+      .brand-copy {
+        margin-top: 18px;
+        max-width: 460px;
+        color: var(--muted);
+        font-size: 1rem;
+        line-height: 1.7;
+      }
+
+      .info-cards {
+        margin-top: 28px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(180px, 1fr));
+        gap: 16px;
+      }
+
+      .info-card {
+        padding: 18px 16px;
+        border-radius: 20px;
+        background: rgba(255,255,255,0.28);
+        border: 1px solid rgba(0,0,0,0.08);
+        backdrop-filter: blur(8px);
+      }
+
+      .info-card strong {
+        display: block;
+        font-size: 1.6rem;
+        margin-bottom: 4px;
+        color: var(--text);
+      }
+
+      .info-card span {
+        color: var(--muted);
+        font-size: 0.88rem;
+      }
+
+      .auth-side {
+        padding: 52px 40px;
+        background: rgba(255,255,255,0.4);
+      }
+
+      .auth-box {
+        max-width: 430px;
+        margin: 0 auto;
+      }
+
+      .auth-box h2 {
+        font-size: 2.1rem;
+        margin-bottom: 4px;
+      }
+
+      .subtext {
+        color: var(--muted);
+        margin-bottom: 26px;
+      }
+
+      .account-choices {
+        display: grid;
+        gap: 12px;
+        margin-bottom: 22px;
+      }
+
+      .social-btn, .action-btn, .role-btn, .mini-btn {
+        border: none;
+        border-radius: 18px;
+        padding: 14px 18px;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+        font-size: 0.96rem;
+        color: var(--text);
+        background: linear-gradient(135deg, rgba(0,255,153,0.38), rgba(255,255,255,0.18));
+        border: 1px solid rgba(0,0,0,0.08);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.65), 0 8px 20px rgba(0,0,0,0.06);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
+      }
+
+      .social-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+      }
+
+      .social-btn:hover, .action-btn:hover, .role-btn:hover, .mini-btn:hover {
+        transform: translateY(-2px);
+        background: linear-gradient(135deg, rgba(255,255,255,0.5), rgba(255,255,255,0.9));
+        color: #000;
+      }
+
+      .social-btn span:first-child {
+        width: 22px;
+        height: 22px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.9);
+        font-weight: 700;
+        font-size: 0.8rem;
+      }
+
+      .divider {
+        position: relative;
+        text-align: center;
+        color: rgba(0,0,0,0.6);
+        margin: 18px 0;
+        font-size: 0.8rem;
+      }
+
+      .divider::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 50%;
+        height: 1px;
+        background: rgba(0,0,0,0.1);
+      }
+
+      .divider span {
+        position: relative;
+        background: rgba(255,255,255,0.6);
+        padding: 0 12px;
+      }
+
+      form {
+        display: grid;
+        gap: 14px;
+      }
+
+      .field {
+        display: grid;
+        gap: 8px;
+      }
+
+      label {
+        font-size: 0.82rem;
+        color: rgba(0,0,0,0.8);
+        font-weight: 600;
+      }
+
+      input, select {
+        width: 100%;
+        padding: 14px 16px;
+        border: 1px solid rgba(0,0,0,0.08);
+        border-radius: 14px;
+        background: rgba(255,255,255,0.7);
+        font-size: 0.96rem;
+        font-family: 'Poppins', sans-serif;
+        color: var(--text);
+        outline: none;
+      }
+
+      input:focus, select:focus {
+        border-color: rgba(0,255,153,0.8);
+        box-shadow: 0 0 0 4px rgba(0,255,153,0.18);
+      }
+
+      .action-btn {
+        margin-top: 8px;
+        background: linear-gradient(135deg, rgba(0,255,153,0.9), rgba(0,255,153,0.42));
+        color: #000;
+        cursor: pointer;
+      }
+
+      .action-btn:hover {
+        background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.75));
+      }
+
+      .account-footer {
+        margin-top: 20px;
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.94rem;
+      }
+
+      .account-footer a {
+        color: #000;
+        text-decoration: none;
+        font-weight: 700;
+      }
+
+      .hidden {
+        display: none !important;
+      }
+
+      .role-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+        margin-bottom: 18px;
+      }
+
+      .role-btn {
+        padding: 12px 8px;
+        text-align: center;
+        font-size: 0.82rem;
+      }
+
+      .role-btn.active {
+        background: linear-gradient(135deg, rgba(0,255,153,0.9), rgba(255,255,255,0.7));
+        border-color: rgba(0,255,153,0.5);
+      }
+
+      .profile-section {
+        display: none;
+        margin-top: 18px;
+        padding-top: 18px;
+        border-top: 1px solid rgba(0,0,0,0.08);
+      }
+
+      .profile-section.visible {
+        display: grid;
+        gap: 14px;
+      }
+
+      .mini-btn {
+        width: fit-content;
+        padding: 10px 16px;
+      }
+
+      .field.hidden {
+        display: none !important;
+      }
+
+      .message {
+        display: none;
+        margin-top: 10px;
+        border-radius: 12px;
+        padding: 10px 12px;
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
+
+      .message.success {
+        display: block;
+        background: rgba(0,255,153,0.18);
+        border: 1px solid rgba(0,255,153,0.4);
+      }
+
+      .message.error {
+        display: block;
+        background: rgba(255, 88, 88, 0.12);
+        border: 1px solid rgba(255, 88, 88, 0.35);
+      }
+
+      @media (max-width: 900px) {
+        .auth-panel {
+          grid-template-columns: 1fr;
+        }
+
+        .brand-side, .auth-side {
+          padding: 32px 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-shell">
+      <div class="auth-panel">
+        <div class="brand-side">
+          <a href="home.html" class="brand-badge" aria-label="Go to homepage">Dr<span>AI</span></a>
+          <h1>Health care built for <span>real life</span></h1>
+          <p class="brand-copy">
+            Connect with trusted doctors, pharmacy experts and patients in one secure health platform.
+          </p>
+
+          <div class="info-cards">
+            <div class="info-card">
+              <strong>1k+</strong>
+              <span>verified experts</span>
+            </div>
+            <div class="info-card">
+              <strong>24/7</strong>
+              <span>health support</span>
+            </div>
+            <div class="info-card">
+              <strong>98%</strong>
+              <span>patient satisfaction</span>
+            </div>
+            <div class="info-card">
+              <strong>2 min</strong>
+              <span>average setup time</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="auth-side">
+          <div class="auth-box">
+            <h2>Create account</h2>
+            <p class="subtext">Choose the role that applies to you.</p>
+
+            <div class="account-choices">
+              <button type="button" class="social-btn" data-provider="google">
+                <span>G</span>
+                <span>Continue with Google</span>
+              </button>
+              <button type="button" class="social-btn" data-provider="facebook">
+                <span>f</span>
+                <span>Continue with Facebook</span>
+              </button>
+            </div>
+
+            <div class="divider"><span>or</span></div>
+
+            <div class="role-grid" aria-label="Account type">
+              <button class="role-btn active" type="button" data-role="patient">Patient</button>
+              <button class="role-btn" type="button" data-role="doctor">Doctor</button>
+              <button class="role-btn" type="button" data-role="pharmacy">Pharmacy</button>
+            </div>
+
+            <form id="signupForm">
+              <div class="field">
+                <label for="username">Username</label>
+                <input id="username" name="username" type="text" placeholder="Enter your username" required />
+              </div>
+
+              <div class="field">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" placeholder="Enter your email" required />
+              </div>
+
+              <div class="field">
+                <label for="challengeInput">Verification challenge</label>
+                <div style="display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;">
+                  <input id="challengeInput" type="text" maxlength="7" placeholder="Enter the 7-character code" required />
+                  <button type="button" class="mini-btn" id="generateChallengeBtn">Generate</button>
+                </div>
+                <div id="challengeBox" class="message" style="display:none;padding:10px 12px;background:rgba(0,255,153,0.12);border:1px solid rgba(0,255,153,0.32);border-radius:12px;margin-top:8px;">
+                  Challenge: <strong id="challengeValue">----</strong>
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password" placeholder="Create a password" required />
+              </div>
+
+              <button type="submit" class="action-btn">Sign up</button>
+            </form>
+
+            <div id="queueNotice" style="margin-top:12px;padding:10px 12px;border-radius:12px;background:rgba(0,0,0,0.03);border:1px solid rgba(0,0,0,0.08);font-size:0.82rem;color:rgba(0,0,0,0.74);">Queue status: up to 10 people can verify at once.</div>
+            <div id="message" class="message"></div>
+
+            <div class="profile-section" id="profileSection">
+              <div class="field" id="dobField">
+                <label id="profileFieldLabel" for="profileFieldValue">Date of birth</label>
+                <input id="profileFieldValue" type="text" placeholder="dd/mm/yyyy" />
+              </div>
+
+              <div class="field hidden" id="experienceField">
+                <label for="experience">Years of experience</label>
+                <input id="experience" type="number" min="1" placeholder="1+" />
+              </div>
+
+              <div class="field hidden" id="bioField">
+                <label for="bio">Biography</label>
+                <textarea id="bio" rows="4" placeholder="Write a short bio" style="width:100%;padding:14px 16px;border:1px solid rgba(0,0,0,0.08);border-radius:14px;background:rgba(255,255,255,0.7);font-family:'Poppins',sans-serif;font-size:0.96rem;resize:vertical;"></textarea>
+              </div>
+
+              <div class="field hidden" id="locationField">
+                <label for="location">Location</label>
+                <input id="location" type="text" placeholder="Hospital or pharmacy location" />
+              </div>
+
+              <div class="field hidden" id="phoneField">
+                <label for="phone">Phone / WhatsApp</label>
+                <input id="phone" type="text" placeholder="Contact number" />
+              </div>
+
+              <div class="field hidden" id="licenceField">
+                <label for="licence">Upload licence</label>
+                <input id="licence" type="file" />
+              </div>
+
+              <div class="field" id="profilePicField">
+                <label for="profilePic">Profile picture (optional)</label>
+                <input id="profilePic" type="file" accept="image/*" />
+              </div>
+
+              <button type="button" class="mini-btn" id="completeProfileBtn">Complete profile</button>
+            </div>
+
+            <p class="account-footer">Already have an account? <a href="login.html">Log in</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const roleButtons = document.querySelectorAll('.role-btn');
+      const profileSection = document.getElementById('profileSection');
+      const profileFieldLabel = document.getElementById('profileFieldLabel');
+      const profileFieldValue = document.getElementById('profileFieldValue');
+      const completeProfileBtn = document.getElementById('completeProfileBtn');
+      const signupForm = document.getElementById('signupForm');
+      const messageBox = document.getElementById('message');
+      const queueNotice = document.getElementById('queueNotice');
+      const challengeInput = document.getElementById('challengeInput');
+      const challengeValue = document.getElementById('challengeValue');
+      const challengeBox = document.getElementById('challengeBox');
+      const dobField = document.getElementById('dobField');
+      const experienceField = document.getElementById('experienceField');
+      const bioField = document.getElementById('bioField');
+      const locationField = document.getElementById('locationField');
+      const phoneField = document.getElementById('phoneField');
+      const licenceField = document.getElementById('licenceField');
+      const profilePicField = document.getElementById('profilePicField');
+      let selectedRole = 'patient';
+      let currentChallenge = '';
+
+      function setRole(role) {
+        selectedRole = role;
+        roleButtons.forEach((button) => {
+          button.classList.toggle('active', button.dataset.role === role);
+        });
+
+        const isPatient = role === 'patient';
+        profileSection.classList.add('visible');
+
+        if (isPatient) {
+          profileFieldLabel.textContent = 'Date of birth';
+          profileFieldValue.placeholder = 'dd/mm/yyyy';
+          profileFieldValue.type = 'text';
+          profileFieldValue.value = '';
+          profilePicField.classList.remove('hidden');
+          dobField.classList.remove('hidden');
+          experienceField.classList.add('hidden');
+          bioField.classList.add('hidden');
+          locationField.classList.add('hidden');
+          phoneField.classList.add('hidden');
+          licenceField.classList.add('hidden');
+        } else {
+          profileFieldLabel.textContent = 'Clinic / business name';
+          profileFieldValue.placeholder = 'Enter your clinic or business name';
+          profileFieldValue.type = 'text';
+          profileFieldValue.value = '';
+          profilePicField.classList.remove('hidden');
+          dobField.classList.add('hidden');
+          experienceField.classList.remove('hidden');
+          bioField.classList.remove('hidden');
+          locationField.classList.remove('hidden');
+          phoneField.classList.remove('hidden');
+          licenceField.classList.remove('hidden');
+        }
+      }
+
+      roleButtons.forEach((button) => {
+        button.addEventListener('click', () => setRole(button.dataset.role));
+      });
+
+      function showMessage(text, type) {
+        messageBox.textContent = text;
+        messageBox.className = `message ${type}`;
+      }
+
+      function updateQueueNotice(queueStatus) {
+        if (!queueStatus) return;
+        queueNotice.textContent = `Queue status: ${queueStatus.active}/${queueStatus.capacity} people active. ${queueStatus.available} spot(s) available.`;
+      }
+
+      async function generateChallenge() {
+        const email = document.getElementById('email').value.trim();
+        if (!email) {
+          showMessage('Please enter an email before generating the verification challenge.', 'error');
+          return;
+        }
+
+        try {
+          const response = await fetch('/api/auth/challenge', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email })
+          });
+          const data = await response.json();
+
+          if (!response.ok) {
+            showMessage(data.message || 'Unable to generate verification challenge.', 'error');
+            updateQueueNotice(data.queueStatus || null);
+            return;
+          }
+
+          currentChallenge = data.challenge;
+          challengeValue.textContent = currentChallenge;
+          challengeBox.style.display = 'block';
+          challengeInput.value = '';
+          showMessage('Verification challenge generated. Type it exactly in the field above.', 'success');
+          updateQueueNotice(data.queueStatus || null);
+        } catch (error) {
+          console.error('Challenge generation error:', error);
+          showMessage('Unable to connect to the server. Please try again.', 'error');
+        }
+      }
+
+      async function checkUsernameAvailability(username) {
+        if (!username.trim()) return;
+        const response = await fetch(`/api/check-username?username=${encodeURIComponent(username)}&role=${encodeURIComponent(selectedRole)}`);
+        const data = await response.json();
+        if (data.exists) {
+          showMessage('This username is already taken. Please use a different one.', 'error');
+        }
+      }
+
+      document.getElementById('username').addEventListener('blur', (event) => {
+        checkUsernameAvailability(event.target.value);
+      });
+
+      document.getElementById('generateChallengeBtn').addEventListener('click', generateChallenge);
+
+      signupForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const username = document.getElementById('username').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
+        const challenge = challengeInput.value.trim();
+
+        if (!username || !email || !password || !challenge) {
+          showMessage('Please fill in your username, email, verification challenge and password.', 'error');
+          return;
+        }
+
+        try {
+          const challengeVerify = await fetch('/api/auth/verify-challenge', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, challenge })
+          });
+          const challengeData = await challengeVerify.json();
+
+          if (!challengeVerify.ok) {
+            showMessage(challengeData.message || 'The verification challenge is incorrect.', 'error');
+            updateQueueNotice(challengeData.queueStatus || null);
+            return;
+          }
+
+          const payload = {
+            username,
+            email,
+            password,
+            role: selectedRole,
+            challenge,
+          };
+
+          const response = await fetch('/api/signup', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+
+          const data = await response.json();
+
+          if (response.ok) {
+            localStorage.setItem('drAiUser', JSON.stringify(data.user));
+            showMessage('Account created successfully. Redirecting...', 'success');
+            updateQueueNotice(data.queueStatus || null);
+            const targetPage = ['doctor', 'pharmacy'].includes(data.user.role) ? 'professional-dashboard.html' : 'home.html';
+            setTimeout(() => window.location.href = targetPage, 600);
+            return;
+          }
+
+          showMessage(data.message || 'Signup failed.', 'error');
+          updateQueueNotice(data.queueStatus || null);
+        } catch (error) {
+          console.error('Signup error:', error);
+          showMessage('Unable to connect to the server. Please try again.', 'error');
+        }
+      });
+
+      completeProfileBtn.addEventListener('click', async () => {
+        const username = document.getElementById('username').value.trim();
+        const profilePayload = {
+          username,
+          role: selectedRole,
+          dateOfBirth: selectedRole === 'patient' ? profileFieldValue.value.trim() : '',
+          yearsExperience: selectedRole !== 'patient' ? document.getElementById('experience').value : 1,
+          biography: selectedRole !== 'patient' ? document.getElementById('bio').value.trim() : '',
+          location: selectedRole !== 'patient' ? document.getElementById('location').value.trim() : '',
+          phone: selectedRole !== 'patient' ? document.getElementById('phone').value.trim() : '',
+          licence: selectedRole !== 'patient' ? document.getElementById('licence').value : '',
+          profilePic: document.getElementById('profilePic').value,
+        };
+
+        let endpoint = '/api/profile/patient';
+        if (selectedRole === 'doctor') endpoint = '/api/profile/doctor';
+        if (selectedRole === 'pharmacy') endpoint = '/api/profile/pharmacy';
+
+        if (selectedRole === 'patient') {
+          const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(profilePayload),
+          });
+
+          const data = await response.json();
+          if (response.ok) {
+            showMessage('Your patient profile is complete and saved.', 'success');
+            setTimeout(() => window.location.href = 'home.html', 700);
+          } else {
+            showMessage(data.message || 'Profile completion failed.', 'error');
+          }
+          return;
+        }
+
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(profilePayload),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          showMessage('Your profile is complete and saved.', 'success');
+          setTimeout(() => window.location.href = 'home.html', 700);
+        } else {
+          showMessage(data.message || 'Profile completion failed.', 'error');
+        }
+      });
+
+      document.querySelectorAll('.social-btn').forEach((button) => {
+        button.addEventListener('click', () => {
+          const providerName = button.dataset.provider;
+          const syntheticUser = { username: `${providerName} user`, email: `${providerName}@gmail.com`, role: 'patient' };
+          localStorage.setItem('drAiUser', JSON.stringify(syntheticUser));
+          showMessage(`${providerName.charAt(0).toUpperCase() + providerName.slice(1)} sign-in successful.`, 'success');
+          setTimeout(() => window.location.href = 'home.html', 600);
+        });
+      });
+
+      setRole('patient');
+    </script>
+  </body>
+</html>

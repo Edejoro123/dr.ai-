@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dr AI | Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --green: #00ff99;
+        --text: #000;
+        --muted: rgba(0,0,0,0.72);
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        font-family: 'Poppins', sans-serif;
+        background: #fff;
+        color: var(--text);
+      }
+      .wrap {
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(135deg, rgba(0,255,153,0.09), rgba(255,255,255,0.9));
+        padding: 24px;
+      }
+      .card {
+        width: min(560px, 100%);
+        background: rgba(255,255,255,0.22);
+        border: 1px solid rgba(0,0,0,0.08);
+        border-radius: 30px;
+        box-shadow: 0 28px 60px rgba(0,0,0,0.09);
+        padding: 36px 32px;
+        backdrop-filter: blur(16px);
+      }
+      .label {
+        display: inline-block;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.45);
+        border: 1px solid rgba(0,0,0,0.08);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .brand-link {
+        display: inline-block;
+        margin-bottom: 12px;
+        font-size: 1.6rem;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        text-decoration: none;
+        color: #000;
+      }
+      .brand-link span {
+        color: var(--green);
+      }
+      h1 { margin-top: 18px; font-size: clamp(2rem,3vw,2.8rem); }
+      .sub { margin-top: 10px; color: var(--muted); }
+      .socials { display: grid; gap: 12px; margin-top: 22px; }
+      .social-btn, .action-btn, .secondary-btn { appearance: none; border: none; border-radius: 18px; font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 0.96rem; color: var(--text); background: linear-gradient(135deg, rgba(0,255,153,0.38), rgba(255,255,255,0.18)); border: 1px solid rgba(0,0,0,0.08); box-shadow: inset 0 1px 0 rgba(255,255,255,0.65), 0 8px 20px rgba(0,0,0,0.06); padding: 14px 18px; transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease; }
+      .social-btn:hover, .action-btn:hover, .secondary-btn:hover { transform: translateY(-2px); background: linear-gradient(135deg, rgba(255,255,255,0.5), rgba(255,255,255,0.9)); }
+      .social-btn { display: flex; align-items: center; justify-content: center; gap: 10px; }
+      .social-btn span:first-child { width: 22px; height: 22px; display: grid; place-items: center; border-radius: 50%; background: rgba(255,255,255,0.9); font-weight: 700; }
+      .divider { position: relative; text-align: center; color: rgba(0,0,0,0.6); margin: 22px 0 18px; font-size: 0.8rem; }
+      .divider::before { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: rgba(0,0,0,0.1); }
+      .divider span { position: relative; background: rgba(255,255,255,0.6); padding: 0 12px; }
+      form { display: grid; gap: 14px; }
+      .field { display: grid; gap: 8px; }
+      label { font-size: 0.82rem; font-weight: 600; }
+      input { width: 100%; padding: 14px 16px; border-radius: 14px; border: 1px solid rgba(0,0,0,0.08); background: rgba(255,255,255,0.72); font-family: 'Poppins', sans-serif; font-size: 0.96rem; }
+      input:focus { outline: none; border-color: rgba(0,255,153,0.8); box-shadow: 0 0 0 4px rgba(0,255,153,0.18); }
+      .inline-row { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: end; }
+      .challenge-box { display: none; margin-top: 10px; padding: 12px 14px; border-radius: 14px; background: rgba(0,255,153,0.12); border: 1px solid rgba(0,255,153,0.3); }
+      .challenge-box strong { letter-spacing: 0.18em; font-size: 1.15rem; }
+      .queue-notice { margin-top: 12px; padding: 10px 12px; border-radius: 12px; background: rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.08); font-size: 0.82rem; color: var(--muted); }
+      .action-btn { margin-top: 8px; background: linear-gradient(135deg, rgba(0,255,153,0.9), rgba(0,255,153,0.42)); color: #000; cursor: pointer; }
+      .secondary-btn { background: rgba(255,255,255,0.25); cursor: pointer; }
+      .bottom { margin-top: 20px; text-align: center; font-size: 0.94rem; color: var(--muted); }
+      .bottom a { color: #000; text-decoration: none; font-weight: 700; }
+      .message { display: none; margin-top: 14px; padding: 10px 12px; border-radius: 12px; font-size: 0.9rem; }
+      .message.success { display: block; background: rgba(0,255,153,0.18); border: 1px solid rgba(0,255,153,0.4); }
+      .message.error { display: block; background: rgba(255, 88, 88, 0.12); border: 1px solid rgba(255, 88, 88, 0.35); }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="card">
+        <a href="home.html" class="brand-link" aria-label="Go to homepage">Dr<span>AI</span></a>
+        <div class="label">Welcome back</div>
+        <h1>Login</h1>
+        <p class="sub">Continue with your Gmail or Facebook, or use your email and password.</p>
+
+        <div class="socials">
+          <button type="button" class="social-btn" data-provider="google"><span>G</span><span>Login with Google</span></button>
+          <button type="button" class="social-btn" data-provider="facebook"><span>f</span><span>Login with Facebook</span></button>
+        </div>
+
+        <div class="divider"><span>or</span></div>
+
+        <form id="loginForm">
+          <div class="field">
+            <label for="email">Email</label>
+            <div class="inline-row">
+              <input id="email" type="email" placeholder="Enter your email" required />
+              <button type="button" class="secondary-btn" id="generateChallengeBtn">Generate code</button>
+            </div>
+          </div>
+
+          <div class="challenge-box" id="challengeBox">
+            <div>Verification challenge</div>
+            <strong id="challengeValue">----</strong>
+          </div>
+
+          <div class="field">
+            <label for="challengeInput">Type the 7-character code exactly</label>
+            <input id="challengeInput" type="text" maxlength="7" placeholder="Enter challenge" required />
+          </div>
+
+          <div class="field">
+            <label for="password">Password</label>
+            <input id="password" type="password" placeholder="Enter your password" required />
+          </div>
+          <button type="submit" class="action-btn">Login</button>
+        </form>
+
+        <div id="queueNotice" class="queue-notice">Queue status: up to 10 people can verify at once.</div>
+        <div id="message" class="message"></div>
+
+        <p class="bottom">Need an account? <a href="signup.html">Sign up</a></p>
+      </div>
+    </div>
+
+    <script>
+      const loginForm = document.getElementById('loginForm');
+      const messageBox = document.getElementById('message');
+      const emailInput = document.getElementById('email');
+      const challengeInput = document.getElementById('challengeInput');
+      const challengeValue = document.getElementById('challengeValue');
+      const challengeBox = document.getElementById('challengeBox');
+      const queueNotice = document.getElementById('queueNotice');
+      let currentChallenge = '';
+
+      if (localStorage.getItem('drAiUser')) {
+        window.location.href = 'home.html';
+      }
+
+      function showMessage(text, type) {
+        messageBox.textContent = text;
+        messageBox.className = `message ${type}`;
+      }
+
+      function updateQueueNotice(queueStatus) {
+        if (!queueStatus) return;
+        queueNotice.textContent = `Queue status: ${queueStatus.active}/${queueStatus.capacity} people active. ${queueStatus.available} spot(s) available.`;
+      }
+
+      async function generateChallenge() {
+        const email = emailInput.value.trim();
+        if (!email) {
+          showMessage('Please enter your email before generating a challenge.', 'error');
+          return;
+        }
+
+        try {
+          const response = await fetch('/api/auth/challenge', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email })
+          });
+
+          const data = await response.json();
+          if (!response.ok) {
+            showMessage(data.message || 'Unable to generate the login challenge.', 'error');
+            updateQueueNotice(data.queueStatus || null);
+            return;
+          }
+
+          currentChallenge = data.challenge;
+          challengeValue.textContent = currentChallenge;
+          challengeBox.style.display = 'block';
+          challengeInput.value = '';
+          showMessage(`Verification challenge generated for ${email}. Type the code exactly.`, 'success');
+          updateQueueNotice(data.queueStatus || null);
+        } catch (error) {
+          console.error('Challenge error:', error);
+          showMessage('Unable to connect to the server. Please try again.', 'error');
+        }
+      }
+
+      document.getElementById('generateChallengeBtn').addEventListener('click', generateChallenge);
+      emailInput.addEventListener('blur', () => {
+        if (emailInput.value.trim()) generateChallenge();
+      });
+
+      loginForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const email = emailInput.value.trim();
+        const password = document.getElementById('password').value;
+        const challenge = challengeInput.value.trim();
+
+        if (!email || !password || !challenge) {
+          showMessage('Please complete the email, verification code, and password fields.', 'error');
+          return;
+        }
+
+        try {
+          const challengeVerify = await fetch('/api/auth/verify-challenge', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, challenge })
+          });
+
+          const challengeData = await challengeVerify.json();
+          if (!challengeVerify.ok) {
+            showMessage(challengeData.message || 'The verification code is not valid.', 'error');
+            updateQueueNotice(challengeData.queueStatus || null);
+            return;
+          }
+
+          const response = await fetch('/api/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password, challenge })
+          });
+
+          const data = await response.json();
+
+          if (response.ok) {
+            showMessage('Login successful. Redirecting...', 'success');
+            localStorage.setItem('drAiUser', JSON.stringify(data.user));
+            updateQueueNotice(data.queueStatus || null);
+            const targetPage = ['doctor', 'pharmacy'].includes(data.user.role) ? 'professional-dashboard.html' : 'home.html';
+            setTimeout(() => window.location.href = targetPage, 600);
+            return;
+          }
+
+          showMessage(data.message || 'Login failed.', 'error');
+          updateQueueNotice(data.queueStatus || null);
+        } catch (error) {
+          console.error('Login error:', error);
+          showMessage('Unable to connect to the server. Please try again.', 'error');
+        }
+      });
+
+      document.querySelectorAll('.social-btn').forEach((button) => {
+        button.addEventListener('click', () => {
+          const providerName = button.dataset.provider;
+          const fakeUser = { username: `${providerName} user`, email: `${providerName}@gmail.com`, role: 'patient' };
+          localStorage.setItem('drAiUser', JSON.stringify(fakeUser));
+          showMessage(`${providerName.charAt(0).toUpperCase() + providerName.slice(1)} login successful.`, 'success');
+          setTimeout(() => window.location.href = 'home.html', 600);
+        });
+      });
+    </script>
+  </body>
+</html>

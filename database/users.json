@@ -1,0 +1,114 @@
+{
+  "users": [
+    {
+      "id": "142d533f-13ce-48e9-9e89-0d694dca2690",
+      "username": "edejoro",
+      "email": "edejoroa@gmail.com",
+      "role": "patient",
+      "password": "****",
+      "passwordHash": "112200ppl",
+      "createdAt": "2026-09-08T23:06:59.289Z",
+      "profileComplete": false
+    },
+    {
+      "id": "700610dd-5096-439c-87bb-ae2369ee3279",
+      "username": "Dr.praise",
+      "email": "edejoroasa@gmail.com",
+      "role": "doctor",
+      "password": "****",
+      "passwordHash": "123456",
+      "createdAt": "2026-09-08T23:15:18.918Z",
+      "profileComplete": false
+    },
+    {
+      "id": "ca236d8e-ee22-445b-a24f-d5ca12ac87a5",
+      "username": "fish",
+      "email": "edejoro@gmail.com",
+      "role": "patient",
+      "password": "****",
+      "passwordHash": "112200ppl",
+      "createdAt": "2026-09-09T00:00:02.628Z",
+      "profileComplete": false
+    },
+    {
+      "id": "80b13f91-2d9c-4c3a-843a-dd1fe3ccd8bb",
+      "username": "patient01",
+      "email": "patient01@example.com",
+      "role": "patient",
+      "password": "****",
+      "passwordHash": "StrongPass1!",
+      "createdAt": "2026-09-09T12:49:01.856Z",
+      "profileComplete": false
+    },
+    {
+      "id": "fca9ab10-b607-4ccb-ae9f-adf2dc45472a",
+      "username": "challengeflowuser",
+      "email": "challenge-flow@example.com",
+      "role": "patient",
+      "password": "****",
+      "passwordHash": "StrongPass1!",
+      "createdAt": "2026-09-09T21:43:32.129Z",
+      "profileComplete": false
+    },
+    {
+      "id": "6e397223-e048-4b4a-9e52-bc04d4c8e9d9",
+      "username": "emeka",
+      "email": "editasa995@gmail.com",
+      "role": "patient",
+      "password": "****",
+      "passwordHash": "112200ppl",
+      "createdAt": "2026-09-09T21:46:11.676Z",
+      "profileComplete": false
+    },
+    {
+      "id": "b9879d03-056c-4579-8038-9d0b83978d19",
+      "username": "Dr.emma uzor",
+      "email": "edejoroasaa@gmail.com",
+      "role": "doctor",
+      "password": "****",
+      "passwordHash": "112200",
+      "createdAt": "2026-09-09T21:47:57.854Z",
+      "profileComplete": false
+    },
+    {
+      "id": "bf6fd7e1-c2f0-4d74-b09c-9fd510fe0196",
+      "username": "Dr.mjladjfl;a",
+      "email": "emaka@gmail.com",
+      "role": "doctor",
+      "password": "****",
+      "passwordHash": "112200ppl",
+      "createdAt": "2026-09-09T22:13:18.252Z",
+      "profileComplete": false
+    },
+    {
+      "id": "463df56c-88bb-4fb7-8631-46ee7967d237",
+      "username": "las;jajskfajs",
+      "email": "chikwo@gmail.com",
+      "role": "patient",
+      "password": "****",
+      "passwordHash": "112200ppl",
+      "createdAt": "2026-09-09T22:14:28.677Z",
+      "profileComplete": false
+    },
+    {
+      "id": "b1a30c7f-3bc5-46d6-ac96-95955a1ccc07",
+      "username": "Dr.doctorflow1788992224694",
+      "email": "doctorflow1788992224694@example.com",
+      "role": "doctor",
+      "password": "****",
+      "passwordHash": "StrongPass1!",
+      "createdAt": "2026-09-09T22:17:05.836Z",
+      "profileComplete": false
+    },
+    {
+      "id": "86eb10f7-09d9-42f6-94d4-e53d296b2f15",
+      "username": "pharm.Dr.;lajsfjlsdjflsd",
+      "email": "asdfasdaf@gmail.com",
+      "role": "pharmacy",
+      "password": "****",
+      "passwordHash": "FtJFxEM",
+      "createdAt": "2026-09-09T22:33:33.941Z",
+      "profileComplete": false
+    }
+  ]
+}
